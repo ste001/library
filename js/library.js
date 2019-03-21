@@ -8,6 +8,7 @@ const book5 = new Book("Basi di Dati", "P.Atzeni", 500, true)
 let myLibrary = [book1, book2, book3, book4, book5]
 
 render()
+initializeButton()
 
 function Book (title, author, pages, read){
     this.title = title
@@ -34,9 +35,11 @@ function addBookToLibrary() {
     // Create a new book and add it to the library
     const book = new Book(title, author, pages, read)
     myLibrary.push(book)
+    render()
 }
 
 function render(){
+    clear()
     myLibrary.forEach(book => {
         const card = document.createElement("div")
         let readAttribute = (book.read) ? "Read" : "Not read yet"
@@ -47,4 +50,15 @@ function render(){
         const container = document.getElementById("container")
         container.appendChild(card)
     })
+}
+
+function clear(){
+    const container = document.getElementById("container")
+    while (container.childNodes.length != 0){
+        container.removeChild(container.childNodes[0])
+    }
+}
+
+function initializeButton(){
+    button = document.getElementById("new-book").addEventListener("click", addBookToLibrary)
 }
