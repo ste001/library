@@ -3,7 +3,7 @@ const book2 = new Book("Fisica Generale", "S.Longhi", 383, true)
 const book3 = new Book("The Promised Neverland 8", "Kaiu Shirai", 150, false)
 const book4 = new Book("Mezzi di trasmissione", "F.Morichetti", 250, true)
 const book5 = new Book("Basi di Dati", "P.Atzeni", 500, true)
-//const book6 = new Book("Internet e Reti", "D.Musumeci", 345, false)
+// const book6 = new Book("Internet e Reti", "D.Musumeci", 345, false)
 
 let myLibrary = [book1, book2, book3, book4, book5]
 
@@ -47,6 +47,7 @@ function render(){
         card.innerHTML = "<b>Title:</b> " + book.title + "<br><b>Author:</b> "
                         + book.author + "<br><b>Pages:</b> " + book.pages
                         + "<br><b>Status:</b> " + readAttribute
+        card.id = myLibrary.indexOf(book)
         const container = document.getElementById("container")
         container.appendChild(card)
         
@@ -54,7 +55,8 @@ function render(){
         const remover = document.createElement("button")
         remover.type = "button"
         remover.textContent = "X"
-        remover.id = "remover"
+        remover.className = "remover"
+        remover.addEventListener("click", function() {removeBookFromLibrary(card.id)})
         card.appendChild(remover)
     })
 }
@@ -68,4 +70,11 @@ function clear(){
 
 function initializeButton(){
     button = document.getElementById("new-book").addEventListener("click", addBookToLibrary)
+}
+
+
+function removeBookFromLibrary(id){
+    myLibrary.splice(id, 1)
+    cardToRemove = document.getElementById(id).remove()
+    render()
 }
