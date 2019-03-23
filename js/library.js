@@ -49,6 +49,13 @@ function render(){
                         + "<br><b>Status:</b> " + readAttribute
         const container = document.getElementById("container")
         container.appendChild(card)
+        
+        // Add a remove button for each book
+        const remover = document.createElement("button")
+        remover.type = "button"
+        remover.textContent = "X"
+        remover.id = "remover"
+        card.appendChild(remover)
     })
 }
 
